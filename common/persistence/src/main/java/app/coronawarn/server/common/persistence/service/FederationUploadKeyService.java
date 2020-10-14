@@ -12,14 +12,14 @@ import app.coronawarn.server.common.persistence.domain.FederationUploadKey;
 import app.coronawarn.server.common.persistence.repository.FederationUploadKeyRepository;
 import app.coronawarn.server.common.persistence.service.common.ExpirationPolicy;
 import app.coronawarn.server.common.persistence.service.common.KeySharingPoliciesChecker;
+import app.coronawarn.server.common.persistence.service.common.Logger;
+import app.coronawarn.server.common.persistence.service.common.LoggerFactory;
 import app.coronawarn.server.common.persistence.service.common.ValidDiagnosisKeyFilter;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,9 +65,9 @@ public class FederationUploadKeyService {
         .filter(key -> sharingPoliciesChecker.canShareKeyAtTime(key, policy, LocalDateTime.now(UTC)))
         .peek(k -> keysPickedAfterSharePolicy.addAndGet(1))
         .collect(Collectors.toList());
-    logger.info(KEYS_SELECTED_FOR_UPLOAD.toString(), listOfKeys.size());
+    logger.info(KEYS_SELECTED_FOR_UPLOAD, listOfKeys.size());
 
-    logger.info(KEYS_PICKED_FROM_UPLOAD_TABLE.toString(), keysPicked.get());
+    logger.info(KEYS_PICKED_FROM_UPLOAD_TABLE, keysPicked.get());
     logger.info("{} keys remaining after filtering by consent", keysPickedAfterConsent.get());
     logger.info("{} keys remaining after filtering by validity", keysPickedAfterValidity.get());
     logger.info("{} keys remaining after filtering by share policy", keysPickedAfterSharePolicy.get());
