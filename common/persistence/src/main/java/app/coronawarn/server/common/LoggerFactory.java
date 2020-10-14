@@ -2,7 +2,6 @@ package app.coronawarn.server.common;
 
 import org.slf4j.ILoggerFactory;
 
-import app.coronawarn.server.common.persistence.service.FederationUploadKeyService;
 
 public class LoggerFactory {
 
@@ -27,7 +26,7 @@ public class LoggerFactory {
      *      href="http://www.slf4j.org/codes.html#loggerNameMismatch">Detected
      *      logger name mismatch</a>
      */
-	public static Logger getLogger(Class<FederationUploadKeyService> clazz) {
+	public static Logger getLogger(Class<?> clazz) {
 		return new Logger(org.slf4j.LoggerFactory.getLogger(clazz));
 	}
 
