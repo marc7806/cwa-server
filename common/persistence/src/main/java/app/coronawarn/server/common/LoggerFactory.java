@@ -1,4 +1,4 @@
-package app.coronawarn.server.common.persistence.service.common;
+package app.coronawarn.server.common;
 
 import org.slf4j.ILoggerFactory;
 

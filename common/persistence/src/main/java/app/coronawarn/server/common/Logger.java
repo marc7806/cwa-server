@@ -1,4 +1,6 @@
-package app.coronawarn.server.common.persistence.service.common;
+package app.coronawarn.server.common;
+
+import app.coronawarn.server.common.persistence.service.common.LogMessages;
 
 /**
  * Delegate logger that only accepts and correctly handles {@link LogMessages}.
